@@ -6,6 +6,7 @@
 #include "editor.h"
 #include "terminal.h"
 #include "autocomplete.h"
+#include "highlight.h"
 #include "config.h"
 
 #include <ctype.h>
@@ -147,6 +148,7 @@ int editor_open(EditorConfig *e, const char *filename) {
 
     /* Load language dict for this file extension */
     ac_load_dict(filename);
+    e->hl_type = hl_get_type(filename);
 
     FILE *fp = fopen(filename, "r");
     if (!fp) return -1;
@@ -283,7 +285,7 @@ static void draw_rows(EditorConfig *e, ABuf *ab) {
             int   len = row->rsize - e->coloff;
             if (len < 0) len = 0;
             if (len > e->screencols) len = e->screencols;
-            ab_append(ab, row->render + e->coloff, len);
+            hl_render_line(ab, row->render + e->coloff, len, e->hl_type);
         }
         ab_append(ab, "\x1b[K\r\n", 5);
     }

@@ -62,6 +62,7 @@ typedef struct EditorConfig {
     int  cmdlen;
     char pending_op;
     int  quit_times;
+    int hl_type;
     AutoComplete ac;
 } EditorConfig;
 

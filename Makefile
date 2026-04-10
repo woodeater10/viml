@@ -7,7 +7,7 @@ OPT     := -O2 -g
 CFLAGS  := $(STD) $(WARN) $(OPT)
 TARGET  := viml
 
-SRCS    := main.c terminal.c editor.c autocomplete.c
+SRCS    := main.c terminal.c editor.c autocomplete.c highlight.c highlight.c
 OBJS    := $(SRCS:.c=.o)
 DEPS    := $(SRCS:.c=.d)
 
